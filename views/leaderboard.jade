@@ -2,18 +2,27 @@ extends layout
 
 block content
 
-   #sign-up
-      form
-         select
-            option house one
-            option house two
-            option house three
+   //- #sign-up
+   //-    form
+   //-       select
+   //-          option() house one
+   //-          option() house two
+   //-          option() house three
 
-         input(type="text", name="email", placeholder="Email")
-         button(type="submit") Submit
+   //-       input(type="text", name="email", placeholder="Email")
+   //-       button(type="submit") Submit
 
-   #left-leaderboard
-      ul.leaderboard
+   //- #leaderboards
 
-   #right-leaderboard
-      ul.leaderboard
+   //-    .one-half
+   //-       ul.leaderboard.fraternity
+
+   //-    .one-half
+   //-       ul.leaderboard.sorority
+
+   a#frat(href="#", onclick="return false;") Frat
+   a#sorority(href="#", onclick="return false;") Sorority
+   a#both(href="#", onclick="return false;") Both
+   br
+   a#value1(href="#", onclick="return false;") Value 1
+   a#value2(href="#", onclick="return false;") Value 2

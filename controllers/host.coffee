@@ -1,6 +1,4 @@
 express = require "express"
-# MongoStore = require("connect-mongo")(express)
-config = require "../config/app"
 path = require "path"
 
 app = module.exports = express()
@@ -20,11 +18,8 @@ app.configure "production", () ->
 # Middleware
 app.use express.query()
 app.use express.bodyParser()
+app.use require("connect-assets")()
 app.use express.static path.join __dirname, "../public"
-# app.use express.cookieParser process.env.COOKIE_SECRET or "super duper secret"
-# app.use express.session()
-#    # store: new MongoStore(url: config.session_store)
-# app.use require("connect-assets")()
 
 # Controllers
 app.use require "./leaderboard"
