@@ -27,6 +27,7 @@ fannect.request = (options, callback) ->
    rest options, (err, resp, body) ->
       return callback(err) if err
       body = JSON.parse(body) if typeof(body) == "string"
+      console.log "#{options.url}:", body
       if resp.statusCode == 401 
          if not options.second_try
             options.second_try = true

@@ -5,11 +5,72 @@
 @import "../lib/mixins"
 @import "../lib/variables"
 
+@font-face
+   font-family: JerseyM54
+   src: url(../fonts/JerseyM54.ttf)
+
+.slider
+   position: relative
+   font-family: JerseyM54
+   .slider-left-button
+   .slider-right-button
+      position: absolute
+      cursor:pointer
+      height: 100%
+      width: 40px
+      top:0
+   .slider-left-button
+      left: -40px
+   .slider-right-button
+      right: -40px
+   
+   .slider-space
+      position: relative
+      .slider-item
+         position:relative;
+         z-index: 5
+      .slider-cover
+      .slider-item
+         cursor:pointer
+         display: block
+         height: 100%
+         float: left
+      .slider-cover
+         position: absolute
+
+.title
+   font-size: 2.4em
+   text-align: center
+   padding: 15px 0 0
+   font-family: JerseyM54
+
 .top-controls
    text-align: center
+   height: 56px
+   border: 1px
+   margin: 10px auto
+   padding: 7px 0 12px
+   color: #eee
+   background: url(/images/TopSlider.png) 50% 50% no-repeat
+   background-size: 1428px 75px 
+   .slider
+      width: 575px
+      margin: 0 auto
+      font-size: 1.4em
+   .slider-space
+      height: 56px
+      line-height: 60px
+      .slider-cover
+      .slider-item
+         width: 33.3333333%
+      .slider-cover
+         background: url(/images/TopSliderCover.png) 50% 50% no-repeat
+         background-size: 192px 56px
+         border-top: 2px solid #000
 
 .chart-wrap 
-   height: 400px
+   margin: 36px 0 38px
+   height: 365px
    text-align: center
 
 .chart
@@ -17,19 +78,49 @@
       fill: steelblue
       stroke: white
 
+   .fraternity
+      fill: url(#fraternity-gradient)
+   .sorority
+      fill: url(#sorority-gradient)
+
    text
       fill: #fff
       font-size: .8em
 
 .bottom-controls
    text-align: center
+   height: 25px
+   width: 300px
+   border: 1px
+   margin: 10px auto
+   padding: 5px 45px
+   font-size: .8em
+   .slider-space
+      height: 25px
+      line-height: 25px
+      .slider-cover
+      .slider-item
+         width: 25%
+
+.red-separator
+   height: 14px
+   background: url(/images/RedBand.png) 50% 50% 
+   background-size: 1509px 14px
+   box-shadow: 0 -2px 4px rgba(0,0,0,.7)
+
+.bottom-section
+   background: url(/images/Pattern_FabricKnit.png)
+   background-size: 4px 4px 
+   padding: 25px 0 
+   box-shadow: 0 3px 10px rgba(0,0,0,.7)
 
 .sign-up
-   margin: 10px auto 30px
+   margin: 0 auto
    width: 280px
    box-shadow: 0 2px 8px #000
    border-radius: 8px
    padding: thick-padding (normal-padding * 2)
+   background: rgba(0,0,0,.1)
     
    .email
       padding: thin-padding 60px thin-padding thin-padding
@@ -74,6 +165,13 @@
       .group-list
          .group-item
             padding: (thin-padding / 2) thin-padding
+            margin: 0 2px
+            &.selected
+               background: #bbb
+            &:last-child
+               border-radius: 0px 0px 8px 8px
+            &:hover
+               background: #ddd
 
    .submit-button
       display: block
@@ -81,3 +179,6 @@
       box-shadow: 0 1px 4px #333
       border-radius: 8px
       text-align: center
+
+.footer
+   height: 60px

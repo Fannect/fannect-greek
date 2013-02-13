@@ -10,6 +10,7 @@ html
       script(type="text/javascript")
          if (!window.fannect) window.fannect = {}
          window.fannect.groups = !{JSON.stringify(groups)}
+         window.fannect.config = !{JSON.stringify(config)}
    
       != js("lib/d3.v3.js")
       != js("site")
@@ -20,30 +21,42 @@ html
    
    body
 
+      .title= config.title
+
       .top-controls
-         a#fraternity(href="#", onclick="return false;") Frat
-         a#both(href="#", onclick="return false;") Both
-         a#sorority(href="#", onclick="return false;") Sorority
-      
+         .slider(data-bind="slider: group_slider_index, count: 3")
+            .slider-left-button
+            .slider-space()
+               a.slider-item Fraternity
+               a.slider-item All Greek
+               a.slider-item Sorority
+               .slider-cover
+            .slider-right-button
+
       .chart-wrap
 
       .bottom-controls
-         a#overall-button(href="#", onclick="return false;") Overall
-         a#passion-button(href="#", onclick="return false;") Passion
-         a#dedication-button(href="#", onclick="return false;") Dedication
-         a#knowledge-button(href="#", onclick="return false;") Knowledge
+         .slider
+            .slider-space(data-bind="slider: points_slider_index, count: 4")
+               a.slider-item Overall
+               a.slider-item Passion
+               a.slider-item Dedication
+               a.slider-item Knowledge
+               .slider-cover
 
-      .sign-up
-         .logo
-         input.email(placeholder="fannect user email", name="email")
-         .selector
-            .selected(data-bind="click: toggleSelector")
-               .group-name(data-bind="text: selected_group().name, css: {'active': show_selector}")
-               .drop-button(data-bind="css: {'active': show_selector}")
-            .list-wrap(data-bind="slideUpDown: show_selector")
-               .group-list(data-bind="foreach: groups")
-                  .group-item(data-bind="text: name, click: $parent.selectGroup")
-         a.submit-button Submit
+      .red-separator
+      .bottom-section
 
+         .sign-up
+            .logo
+            input(type="email", pattern="[^ @]*@[^ @]*", class="email", data-bind="value: email", placeholder="fannect user email")
+            .selector
+               .selected(data-bind="click: toggleSelector, clickOff: show_selector")
+                  .group-name(data-bind="text: selected_group().name, css: {'active': show_selector}")
+                  .drop-button(data-bind="css: {'active': show_selector}")
+               .list-wrap(data-bind="slideUpDown: show_selector")
+                  .group-list(data-bind="foreach: groups")
+                     .group-item(data-bind="text: name, click: $parent.selectGroup, css: { 'selected': selected }")
+            a.submit-button(data-bind="click: submit") Submit
 
-      #footer
+      .footer

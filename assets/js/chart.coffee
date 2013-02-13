@@ -1,7 +1,7 @@
 do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
    
    $(document).ready () ->
-      height = 400
+      height = 365
       width = 800
 
       frat = []
@@ -27,21 +27,14 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
             .attr("width", width)
             .attr("height", height)
 
-         setChartValue("overall")
+         fc.setChartValue("overall")
 
-         chart.append("line")
-            .attr("x1", 0)
-            .attr("x2", width)
-            .attr("y1", height - .5)
-            .attr("y2", height - .5)
-            .style("stroke", "#000")
-
-      setChartValue = (prop) ->
+      fc.setChartValue = (prop) ->
          el.data = el.points[prop] for el in both
 
-         max = 16
+         max = 18
          (max = d.points.overall if d.points.overall > max) for d in both
-         max = max * 1.20
+         max = max * 1.05
          
          y = d3.scale.linear().domain([-2, max]).rangeRound([0, height])
          x = getXFunc(both.length)
@@ -50,9 +43,9 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
          chart.selectAll("rect")
                .data(both, (d) -> d._id)
             .enter().append("rect")
-               .attr("x", (d, i) -> x(i) - .5)
+               .attr("x", (d, i) -> x(i) + (.25 * (both.length - 1)))
                .attr("y", (d) -> height)
-               .attr("width", width / both.length)
+               .attr("width", (width / both.length) - (.25 * (both.length - 1)))
                .attr("height", 0)
                .attr("class", (d) -> d.style )
             .transition()
@@ -102,7 +95,7 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
                   return (t) -> this.textContent = parseInt(i(t)))
 
 
-      changeToFraternity = () ->
+      fc.changeToFraternity = () ->
          x = getXFunc(frat.length)
 
          chart.selectAll("rect")
@@ -119,7 +112,7 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
                .attr("x", (d, i) -> x(i) + (width / frat.length))
                .attr("dx", (d, i) -> -(width / frat.length / 2))
             
-      changeToSorority = () ->
+      fc.changeToSorority = () ->
          x = getXFunc(sorority.length)
          w = width / sorority.length
 
@@ -137,7 +130,7 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
                .attr("x", (d, i) -> x(i) + (width / sorority.length) - (w * frat.length))
                .attr("dx", (d, i) -> -(width / sorority.length / 2))
 
-      changeToBoth = () ->
+      fc.changeToBoth = () ->
          x = getXFunc(both.length)
 
          chart.selectAll("rect")
@@ -154,12 +147,25 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
                .attr("x", (d, i) -> x(i) + (width / both.length))
                .attr("dx", (d, i) -> -(width / both.length / 2))
 
-      setupChart()
+      _createGradient = (id, start, stop) =>
+         gradient = chart.append("svg:linearGradient")
+            .attr("id", id)
+            .attr("x1", "0%")
+            .attr("y1", "0%")
+            .attr("x2", "0%")
+            .attr("y2", "100%")
+            .attr("spreadMethod", "pad");
+          
+         gradient.append("svg:stop")
+            .attr("offset", "0%")
+            .attr("stop-color", start)
+            .attr("stop-opacity", 1);
+          
+         gradient.append("svg:stop")
+            .attr("offset", "100%")
+            .attr("stop-color", stop)
+            .attr("stop-opacity", 1);
 
-      $("#frat").click () -> changeToFraternity()
-      $("#sorority").click () -> changeToSorority()
-      $("#both").click () -> changeToBoth()
-      $("#overall-button").click () -> setChartValue "overall"
-      $("#passion-button").click () -> setChartValue "passion"
-      $("#dedication-button").click () -> setChartValue "dedication"
-      $("#knowledge-button").click () -> setChartValue "knowledge"
+      setupChart()      
+      _createGradient("fraternity-gradient", fc.config.fraternity.start_color, fc.config.fraternity.stop_color)
+      _createGradient("sorority-gradient", fc.config.sorority.start_color, fc.config.sorority.stop_color)
