@@ -1,37 +1,33 @@
-do ($ = jQuery, d3 = window.d3) ->
+do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
    
    $(document).ready () ->
+      height = 600
+      width = 800
 
-      height = 250
-      width = 600
+      frat = []
+      sorority = []
+      both = fc.groups
 
-      id = 0
-      v = 70
+      for group in fc.groups 
+         if ("fraternity" in group.tags)
+            group.style = "fraternity"
+            frat.push(group)
+         else 
+            group.style = "sorority"
+            sorority.push(group)
 
-      next = () ->
-         return {
-            id: ++id
-            value1: v = ~~Math.max(10, Math.min(90, v + 10 * (Math.random() - .5)))
-            value2: v = ~~Math.max(10, Math.min(90, v + 10 * (Math.random() - .5)))
-         }
-
-
-
-      frat = d3.range(10).map(next)
-      sorority = d3.range(10).map(next)
-      both = frat.concat sorority
       chart = null
 
       getXFunc = (count) ->
          return d3.scale.linear().domain([0, 1]).range([0, width / (count)])
       
       setupChart = () ->
-         chart = d3.select("body").append("svg")
+         chart = d3.select(".chart-wrap").append("svg")
             .attr("class", "chart")
             .attr("width", width)
             .attr("height", height)
 
-         setChartValue("value1")
+         setChartValue("overall")
 
          chart.append("line")
             .attr("x1", 0)
@@ -41,19 +37,24 @@ do ($ = jQuery, d3 = window.d3) ->
             .style("stroke", "#000")
 
       setChartValue = (prop) ->
-         y = d3.scale.linear().domain([0, 90]).rangeRound([0, height])
-         x = getXFunc(both.length)
+         el.data = el.points[prop] for el in both
 
-         el.data = el[prop] for el in both
+         max = 16
+         (max = d.data if d.data > max) for d in both
+         max = max * 1.20
+         
+         y = d3.scale.linear().domain([-2, max]).rangeRound([0, height])
+         x = getXFunc(both.length)
          
          # create bars
          chart.selectAll("rect")
-               .data(both, (d) -> d.id)
+               .data(both, (d) -> d._id)
             .enter().append("rect")
                .attr("x", (d, i) -> x(i) - .5)
                .attr("y", (d) -> height)
                .attr("width", width / both.length)
                .attr("height", 0)
+               .attr("class", (d) -> d.style )
             .transition()
                .delay(100)
                .duration(750)
@@ -72,7 +73,7 @@ do ($ = jQuery, d3 = window.d3) ->
 
          # create text
          chart.selectAll("text")
-               .data(both, (d) -> d.id)
+               .data(both, (d) -> d._id)
             .enter().append("text")
                .attr("x", (d, i) -> x(i) + (width / both.length))
                .attr("y", (d, i) -> height)
@@ -105,14 +106,14 @@ do ($ = jQuery, d3 = window.d3) ->
          x = getXFunc(frat.length)
 
          chart.selectAll("rect")
-               .data(both, (d) -> d.id)
+               .data(both, (d) -> d._id)
             .transition()
                .duration(1000)
                .attr("x", (d, i) -> x(i) )
                .attr("width", width / frat.length)
 
          chart.selectAll("text")
-               .data(both, (d) -> d.id)
+               .data(both, (d) -> d._id)
             .transition()
                .duration(1000)
                .attr("x", (d, i) -> x(i) + (width / frat.length))
@@ -123,14 +124,14 @@ do ($ = jQuery, d3 = window.d3) ->
          w = width / sorority.length
 
          chart.selectAll("rect")
-               .data(both, (d) -> d.id)
+               .data(both, (d) -> d._id)
             .transition()
                .duration(1000)
                .attr("x", (d, i) -> x(i) - (w * frat.length) )
                .attr("width", w)
 
          chart.selectAll("text")
-               .data(both, (d) -> d.id)
+               .data(both, (d) -> d._id)
             .transition()
                .duration(1000)
                .attr("x", (d, i) -> x(i) + (width / sorority.length) - (w * frat.length))
@@ -140,14 +141,14 @@ do ($ = jQuery, d3 = window.d3) ->
          x = getXFunc(both.length)
 
          chart.selectAll("rect")
-               .data(both, (d) -> d.id)
+               .data(both, (d) -> d._id)
             .transition()
                .duration(1000)
                .attr("x", (d, i) -> x(i))
                .attr("width", width / both.length)
 
          chart.selectAll("text")
-               .data(both, (d) -> d.id)
+               .data(both, (d) -> d._id)
             .transition()
                .duration(1000)
                .attr("x", (d, i) -> x(i) + (width / both.length))
@@ -158,5 +159,5 @@ do ($ = jQuery, d3 = window.d3) ->
       $("#frat").click () -> changeToFraternity()
       $("#sorority").click () -> changeToSorority()
       $("#both").click () -> changeToBoth()
-      $("#value1").click () -> setChartValue "value1"
-      $("#value2").click () -> setChartValue "value2"
+      $("#value1").click () -> setChartValue "overall"
+      $("#value2").click () -> setChartValue "passion"

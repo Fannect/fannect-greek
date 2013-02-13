@@ -1,5 +1,12 @@
 express = require "express"
 path = require "path"
+fannect = require "../utils/fannectAccess"
+fannect {
+   login_url: process.env.LOGIN_URL or "http://localhost:2200"
+   resource_url: process.env.RESOURCE_URL or "http://localhost:2100"
+   client_id: process.env.CLIENT_ID or "some_clientid"
+   client_secret: process.env.CLIENT_SECRET or "clientsecret"
+}
 
 app = module.exports = express()
 

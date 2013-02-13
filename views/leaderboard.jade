@@ -2,23 +2,9 @@ extends layout
 
 block content
 
-   //- #sign-up
-   //-    form
-   //-       select
-   //-          option() house one
-   //-          option() house two
-   //-          option() house three
-
-   //-       input(type="text", name="email", placeholder="Email")
-   //-       button(type="submit") Submit
-
-   //- #leaderboards
-
-   //-    .one-half
-   //-       ul.leaderboard.fraternity
-
-   //-    .one-half
-   //-       ul.leaderboard.sorority
+   script(type="text/javascript")
+      if (!window.fannect) window.fannect = {}
+      window.fannect.groups = !{JSON.stringify(groups)}
 
    a#frat(href="#", onclick="return false;") Frat
    a#sorority(href="#", onclick="return false;") Sorority
@@ -26,3 +12,5 @@ block content
    br
    a#value1(href="#", onclick="return false;") Value 1
    a#value2(href="#", onclick="return false;") Value 2
+
+   .chart-wrap
