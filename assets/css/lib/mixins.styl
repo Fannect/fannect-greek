@@ -17,10 +17,10 @@ hex(decimal)
 argb(color, alpha = 1)
   unquote('#') + hex(alpha * 255) + hex(red(color)) + hex(green(color)) + hex(blue(color))
 
-box-shadow(shadow...)
-  -webkit-box-shadow: shadow
-  -moz-box-shadow: shadow
-  box-shadow: shadow
+box-shadow()
+  -webkit-box-shadow: arguments
+  -moz-box-shadow: arguments
+  box-shadow: arguments
 
 background-gradient(startColor = #555, endColor = #333)
   background-color: mix(startColor, endColor, 60%)
@@ -43,10 +43,10 @@ transition(args...)
 transform(args...)
   -webkit-transform: args;
 
-border-radius(radius)
-  -webkit-border-radius: radius
-  -moz-border-radius: radius
-  border-radius: radius
+border-radius()
+  -webkit-border-radius: arguments
+  -moz-border-radius: arguments
+  border-radius: arguments
 
 border-bottom-radius(radius)
   -webkit-border-bottom-right-radius: radius

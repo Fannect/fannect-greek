@@ -29,4 +29,4 @@ app.use require("connect-assets")()
 app.use express.static path.join __dirname, "../public"
 
 # Controllers
-app.use require "./leaderboard"
+app.use require "./greek"

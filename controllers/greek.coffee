@@ -13,4 +13,4 @@ app.get "/", (req, res, next) ->
       qs: { tags: "greek" }
    , (err, groups) ->
       return res.render("error", { error: err }) if err
-      res.render "leaderboard", groups: groups
+      res.render "layout", groups: groups

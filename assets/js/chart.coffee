@@ -1,7 +1,7 @@
 do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
    
    $(document).ready () ->
-      height = 600
+      height = 400
       width = 800
 
       frat = []
@@ -40,7 +40,7 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
          el.data = el.points[prop] for el in both
 
          max = 16
-         (max = d.data if d.data > max) for d in both
+         (max = d.points.overall if d.points.overall > max) for d in both
          max = max * 1.20
          
          y = d3.scale.linear().domain([-2, max]).rangeRound([0, height])
@@ -159,5 +159,7 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
       $("#frat").click () -> changeToFraternity()
       $("#sorority").click () -> changeToSorority()
       $("#both").click () -> changeToBoth()
-      $("#value1").click () -> setChartValue "overall"
-      $("#value2").click () -> setChartValue "passion"
+      $("#overall-button").click () -> setChartValue "overall"
+      $("#passion-button").click () -> setChartValue "passion"
+      $("#dedication-button").click () -> setChartValue "dedication"
+      $("#knowledge-button").click () -> setChartValue "knowledge"

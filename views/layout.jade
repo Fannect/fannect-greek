@@ -5,26 +5,45 @@ html
       meta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1")
       meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no")
       
-      block styles
-         != css("main")
+      != css("main")
 
-      block scripts
-         != js("lib/d3.v3.js")
-         != js("lib/jquery-1.8.2.js")
-         //- != js("lib/jquery-1.8.1")
-         //- != js("lib/knockout")
+      script(type="text/javascript")
+         if (!window.fannect) window.fannect = {}
+         window.fannect.groups = !{JSON.stringify(groups)}
+   
+      != js("lib/d3.v3.js")
+      != js("site")
 
    - var viewDir = locals.settings.views;
    - var view = locals.filename.replace(viewDir, "").replace(".jade", "").replace(/^[\\\/]/g, "");
    - var pageClass = view.replace(/[\\\/]/g, "-") + "-page";
    
-   body(id=pageClass)
+   body
 
-      #header
+      .top-controls
+         a#fraternity(href="#", onclick="return false;") Frat
+         a#both(href="#", onclick="return false;") Both
+         a#sorority(href="#", onclick="return false;") Sorority
+      
+      .chart-wrap
 
-      #main
-         block content
+      .bottom-controls
+         a#overall-button(href="#", onclick="return false;") Overall
+         a#passion-button(href="#", onclick="return false;") Passion
+         a#dedication-button(href="#", onclick="return false;") Dedication
+         a#knowledge-button(href="#", onclick="return false;") Knowledge
+
+      .sign-up
+         .logo
+         input.email(placeholder="fannect user email", name="email")
+         .selector
+            .selected(data-bind="click: toggleSelector")
+               .group-name(data-bind="text: selected_group().name, css: {'active': show_selector}")
+               .drop-button(data-bind="css: {'active': show_selector}")
+            .list-wrap(data-bind="slideUpDown: show_selector")
+               .group-list(data-bind="foreach: groups")
+                  .group-item(data-bind="text: name, click: $parent.selectGroup")
+         a.submit-button Submit
+
 
       #footer
-         
-         != js("test")
