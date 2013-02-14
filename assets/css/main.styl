@@ -9,6 +9,9 @@
    font-family: JerseyM54
    src: url(../fonts/JerseyM54.ttf)
 
+body
+   color: #000
+
 .slider
    position: relative
    font-family: JerseyM54
@@ -38,81 +41,94 @@
       .slider-cover
          position: absolute
 
-.title
-   font-size: 2.4em
-   text-align: center
-   padding: 15px 0 0
-   font-family: JerseyM54
+.top-section
+   background: url(/images/DotBackground.png) 50% 0 no-repeat
+   background-size: 1428px 673px
+   min-width: 1177px
 
-.top-controls
-   text-align: center
-   height: 56px
-   border: 1px
-   margin: 10px auto
-   padding: 7px 0 12px
-   color: #eee
-   background: url(/images/TopSlider.png) 50% 50% no-repeat
-   background-size: 1428px 75px 
-   .slider
-      width: 575px
+   .top-wrap
+      width: 1177px
       margin: 0 auto
-      font-size: 1.4em
-   .slider-space
+
+   .title
+      font-size: 2.4em
+      text-align: center
+      color: #ccc
+      padding: 15px 0 0
+      font-family: JerseyM54
+
+   .top-controls
+      text-align: center
       height: 56px
-      line-height: 60px
-      .slider-cover
-      .slider-item
-         width: 33.3333333%
-      .slider-cover
-         background: url(/images/TopSliderCover.png) 50% 50% no-repeat
-         background-size: 192px 56px
-         border-top: 2px solid #000
+      border: 1px
+      margin: 10px auto
+      padding: 7px 0 12px
+      color: #eee
+      background: url(/images/TopSlider.png) 50% 50% no-repeat
+      background-size: 1428px 75px 
+      .slider
+         width: 575px
+         margin: 0 auto
+         font-size: 1.4em
+      .slider-space
+         height: 56px
+         line-height: 60px
+         .slider-cover
+         .slider-item
+            width: 33.3333333%
+         .slider-cover
+            background: url(/images/TopSliderCover.png) 50% 50% no-repeat
+            background-size: 192px 56px
+            border-top: 2px solid #000
 
-.chart-wrap 
-   margin: 36px 0 38px
-   height: 365px
-   text-align: center
+   .chart-wrap 
+      margin: 36px 0 38px
+      height: 377px
+      text-align: center
+      background: url(/images/GraphBox.png) 50% no-repeat
+      background-size: 1177px 377px
+   .chart
+      margin-top: 12px
+      .fraternity
+         fill: url(#fraternity-gradient)
+      .sorority
+         fill: url(#sorority-gradient)
+      text
+         fill: #fff
+         font-size: .8em
 
-.chart
-   rect 
-      fill: steelblue
-      stroke: white
-
-   .fraternity
-      fill: url(#fraternity-gradient)
-   .sorority
-      fill: url(#sorority-gradient)
-
-   text
-      fill: #fff
-      font-size: .8em
-
-.bottom-controls
-   text-align: center
-   height: 25px
-   width: 300px
-   border: 1px
-   margin: 10px auto
-   padding: 5px 45px
-   font-size: .8em
-   .slider-space
+   .bottom-controls
+      text-align: center
       height: 25px
-      line-height: 25px
-      .slider-cover
-      .slider-item
-         width: 25%
+      width: 300px
+      border: 1px
+      margin: 10px auto 0
+      padding: 5px 45px
+      font-size: .8em
+      .slider-space
+         height: 25px
+         line-height: 25px
+         .slider-cover
+         .slider-item
+            width: 25%
 
 .red-separator
    height: 14px
    background: url(/images/RedBand.png) 50% 50% 
    background-size: 1509px 14px
    box-shadow: 0 -2px 4px rgba(0,0,0,.7)
+   min-width: 1177px
 
 .bottom-section
    background: url(/images/Pattern_FabricKnit.png)
    background-size: 4px 4px 
    padding: 25px 0 
    box-shadow: 0 3px 10px rgba(0,0,0,.7)
+   min-width: 1177px
+
+   .bottom-wrap
+      width: 1177px
+      margin: 0 auto
 
 .sign-up
    margin: 0 auto
@@ -182,3 +198,5 @@
 
 .footer
    height: 60px
+   background: url(/images/DotBackground.png) 50% 0 no-repeat
+   background-size: 1428px 673px

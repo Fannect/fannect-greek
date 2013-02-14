@@ -20,43 +20,43 @@ html
    - var pageClass = view.replace(/[\\\/]/g, "-") + "-page";
    
    body
+      .top-section
+         .top-wrap
+            .title= config.title
+            .top-controls
+               .slider(data-bind="slider: group_slider_index, count: 3")
+                  .slider-left-button
+                  .slider-space()
+                     a.slider-item Fraternity
+                     a.slider-item All Greek
+                     a.slider-item Sorority
+                     .slider-cover
+                  .slider-right-button
 
-      .title= config.title
+            .chart-wrap
 
-      .top-controls
-         .slider(data-bind="slider: group_slider_index, count: 3")
-            .slider-left-button
-            .slider-space()
-               a.slider-item Fraternity
-               a.slider-item All Greek
-               a.slider-item Sorority
-               .slider-cover
-            .slider-right-button
-
-      .chart-wrap
-
-      .bottom-controls
-         .slider
-            .slider-space(data-bind="slider: points_slider_index, count: 4")
-               a.slider-item Overall
-               a.slider-item Passion
-               a.slider-item Dedication
-               a.slider-item Knowledge
-               .slider-cover
+            .bottom-controls
+               .slider
+                  .slider-space(data-bind="slider: points_slider_index, count: 4")
+                     a.slider-item Overall
+                     a.slider-item Passion
+                     a.slider-item Dedication
+                     a.slider-item Knowledge
+                     .slider-cover
 
       .red-separator
       .bottom-section
-
-         .sign-up
-            .logo
-            input(type="email", pattern="[^ @]*@[^ @]*", class="email", data-bind="value: email", placeholder="fannect user email")
-            .selector
-               .selected(data-bind="click: toggleSelector, clickOff: show_selector")
-                  .group-name(data-bind="text: selected_group().name, css: {'active': show_selector}")
-                  .drop-button(data-bind="css: {'active': show_selector}")
-               .list-wrap(data-bind="slideUpDown: show_selector")
-                  .group-list(data-bind="foreach: groups")
-                     .group-item(data-bind="text: name, click: $parent.selectGroup, css: { 'selected': selected }")
-            a.submit-button(data-bind="click: submit") Submit
+         .bottom-wrap
+            .sign-up
+               .logo
+               input(type="email", pattern="[^ @]*@[^ @]*", class="email", data-bind="value: email", placeholder="fannect user email")
+               .selector
+                  .selected(data-bind="click: toggleSelector, clickOff: show_selector")
+                     .group-name(data-bind="text: selected_group().name, css: {'active': show_selector}")
+                     .drop-button(data-bind="css: {'active': show_selector}")
+                  .list-wrap(data-bind="slideUpDown: show_selector")
+                     .group-list(data-bind="foreach: groups")
+                        .group-item(data-bind="text: name, click: $parent.selectGroup, css: { 'selected': selected }")
+               a.submit-button(data-bind="click: submit") Submit
 
       .footer

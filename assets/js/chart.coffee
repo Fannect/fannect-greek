@@ -1,12 +1,12 @@
 do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
    
    $(document).ready () ->
-      height = 365
-      width = 800
+      height = 350
+      width = 1150
+      padding = 4
 
       frat = []
       sorority = []
-      both = fc.groups
 
       for group in fc.groups 
          if ("fraternity" in group.tags)
@@ -16,10 +16,13 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
             group.style = "sorority"
             sorority.push(group)
 
+      both = frat.concat(sorority)
       chart = null
 
       getXFunc = (count) ->
          return d3.scale.linear().domain([0, 1]).range([0, width / (count)])
+
+      normalizeName = (name) -> name.replace(/\s/g, "").toLowerCase()
       
       setupChart = () ->
          chart = d3.select(".chart-wrap").append("svg")
@@ -40,14 +43,14 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
          x = getXFunc(both.length)
          
          # create bars
-         chart.selectAll("rect")
+         chart.selectAll("rect.bar")
                .data(both, (d) -> d._id)
             .enter().append("rect")
-               .attr("x", (d, i) -> x(i) + (.25 * (both.length - 1)))
+               .attr("x", (d, i) -> i * width / both.length + padding / 2)
                .attr("y", (d) -> height)
-               .attr("width", (width / both.length) - (.25 * (both.length - 1)))
+               .attr("width", (width / both.length) - padding)
                .attr("height", 0)
-               .attr("class", (d) -> d.style )
+               .attr("class", (d) -> d.style + " bar")
             .transition()
                .delay(100)
                .duration(750)
@@ -56,7 +59,7 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
                .attr("height", (d) -> y(d.data))
 
          # update bars
-         chart.selectAll("rect")
+         chart.selectAll("rect.bar")
             .transition()
                .delay(100)
                .duration(750)
@@ -94,16 +97,42 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
                   i = d3.interpolate(this.textContent, d.data)
                   return (t) -> this.textContent = parseInt(i(t)))
 
+         # create image
+         # chart.selectAll("div.greek-letters")
+         #       .data(both, (d) -> d._id)
+         #    .enter().append("div")
+         #       .attr("x", (d, i) -> x(i) + (.25 * (both.length - 1)))
+         #       .attr("y", (d) -> height)
+         #       .attr("width", (width / both.length) - (.25 * (both.length - 1)))
+         #       .attr("height", 0)
+         #       .attr("class", "greek-letters")
+         #       .attr("style", (d) -> "background: url(images/#{normalizeName(d.name)}.png) 50% 50% no-repeat;")
+         #    .transition()
+         #       .delay(100)
+         #       .duration(750)
+         #       .ease("quad-out")
+         #       .attr("y", (d) -> height - 50)
+         #       .attr("height", 40)
+
+         # # update image
+         # chart.selectAll("div.greek-letters")
+         #    .transition()
+         #       .delay(100)
+         #       .duration(750)
+         #       .ease("quad-out")
+         #       .attr("y", (d) -> height - 50)
+         #       .attr("height", 40)
+
 
       fc.changeToFraternity = () ->
          x = getXFunc(frat.length)
 
-         chart.selectAll("rect")
+         chart.selectAll("rect.bar")
                .data(both, (d) -> d._id)
             .transition()
                .duration(1000)
-               .attr("x", (d, i) -> x(i) )
-               .attr("width", width / frat.length)
+               .attr("x", (d, i) -> i * width / frat.length + padding / 2)
+               .attr("width", width / frat.length - padding)
 
          chart.selectAll("text")
                .data(both, (d) -> d._id)
@@ -116,12 +145,12 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
          x = getXFunc(sorority.length)
          w = width / sorority.length
 
-         chart.selectAll("rect")
+         chart.selectAll("rect.bar")
                .data(both, (d) -> d._id)
             .transition()
                .duration(1000)
-               .attr("x", (d, i) -> x(i) - (w * frat.length) )
-               .attr("width", w)
+               .attr("x", (d, i) -> i * width / frat.length + padding / 2 - (w * frat.length))
+               .attr("width", w - padding)
 
          chart.selectAll("text")
                .data(both, (d) -> d._id)
@@ -133,12 +162,12 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
       fc.changeToBoth = () ->
          x = getXFunc(both.length)
 
-         chart.selectAll("rect")
+         chart.selectAll("rect.bar")
                .data(both, (d) -> d._id)
             .transition()
                .duration(1000)
-               .attr("x", (d, i) -> x(i))
-               .attr("width", width / both.length)
+               .attr("x", (d, i) -> i * width / both.length + padding / 2)
+               .attr("width", width / both.length - padding)
 
          chart.selectAll("text")
                .data(both, (d) -> d._id)
