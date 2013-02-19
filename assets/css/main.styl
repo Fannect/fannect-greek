@@ -129,14 +129,19 @@ body
    .bottom-wrap
       width: 1177px
       margin: 0 auto
-
 .sign-up
    margin: 0 auto
-   width: 280px
+   width: 320px
    box-shadow: 0 2px 8px #000
    border-radius: 8px
    padding: thick-padding (normal-padding * 2)
-   background: rgba(0,0,0,.1)
+   background: rgba(0,0,0,.15)
+   
+   .logo
+      background: url(/images/logo.png) 50% no-repeat
+      background-size: 200px 34px
+      height: 51px
+      margin-bottom: 15px
     
    .email
       padding: thin-padding 60px thin-padding thin-padding
@@ -144,14 +149,19 @@ body
       border-radius: 8px
       border: none
       -webkit-appearance: none
+      width: 252px
       &:focus
          outline: none
+
    .selector
       margin: normal-padding 0
       position: relative
+      .none-selected
+         color: #aaa
       .selected
          position: relative
          .group-name
+            background-color: #fff
             padding: thin-padding 60px thin-padding thin-padding
             box-shadow: inset 0 1px 4px #333
             border-radius: 8px
@@ -164,13 +174,22 @@ body
             top: 0
             bottom: 1px
             border-radius: 0px 8px 8px 0px
-            box-shadow: -1px 0 2px #333, 0 1px 2px #333
-            background: #fff
-
+            box-shadow: -1px 0 2px #333, 0 1px 2px #333, inset 0 1px 2px #fff
+            background-gradient: #eee #999
             &.active
                border-radius: 0px 8px 0px 0px
                box-shadow: inset 0 1px 4px #333
+               background-gradient: #999 #eee
                bottom: 0
+            .down-arrow
+               position: absolute
+               background: url(/images/DownArrow.png) no-repeat
+               background-size: 31px 21px
+               top: 50%
+               left: 50%
+               width: 31px
+               height: 21px
+               margin: -10px 0 0 -15px
       .list-wrap
          position: absolute
          width: 100%
@@ -192,11 +211,29 @@ body
    .submit-button
       display: block
       padding: normal-padding
-      box-shadow: 0 1px 4px #333
+      box-shadow: 0 1px 4px #333, inset 0 1px 2px #fff
       border-radius: 8px
       text-align: center
-
+      background-gradient: #eee #999
+      &:active
+         background-gradient: #999 #eee
+         box-shadow: inset 0 1px 4px rgba(0,0,0,.6), inset 0 -1px 2px rgba(0,0,0,.3)
 .footer
    height: 60px
    background: url(/images/DotBackground.png) 50% 0 no-repeat
    background-size: 1428px 673px
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5)
+   .top-controls
+      background-image: url(/images/TopSlider@2x.png) !important
+   .chart-wrap
+      background-image: url(/images/GraphBox@2x.png) !important
+   .bottom-section
+      background-image: url(/images/Pattern_FabricKnit@2x.png) !important
+   .logo
+      background-image: url(/images/logo@2x.png) !important
+   .down-arrow
+      background-image: url(/images/DownArrow@2x.png) !important
+   .top-section
+   .footer
+      background-image: url(/images/DotBackground@2x.png) !important

@@ -6,13 +6,14 @@ app = module.exports = express()
 
 fannect = require "../utils/fannectAccess"
 
-app.get "/", (req, res, next) ->
+app.get "/:school", (req, res, next) ->
+   school = config[req.params.school]
    fannect.request
-      url: "/v1/teams/#{config.team_id}/groups"
+      url: "/v1/teams/#{school.team_id}/groups"
       qs: { tags: "greek" }
    , (err, groups) ->
       return res.render("error", { error: err }) if err
-      res.render "layout", { groups: groups, config: config }
+      res.render "layout", { groups: groups, config: school }
 
 app.post "/", (req, res, next) ->
    group_id = req.body.group_id

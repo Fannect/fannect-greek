@@ -3,7 +3,7 @@ do ($ = jQuery, ko = window.ko, fc = window.fannect) ->
    class fc.GreekViewModel
       constructor: (groups) ->
          @email = ko.observable()
-         @selected_group = ko.observable(name: "Fraternity / Sorority")
+         @selected_group = ko.observable(name: "<span class='none-selected'>Fraternity / Sorority</span>")
          @show_selector = ko.observable(false)
          @selected_index = -1
          groups[i].selected = ko.observable(false) for g, i in groups
