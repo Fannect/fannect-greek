@@ -67,8 +67,8 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
                .attr("y", (d) -> height - y(d.data) - .5)
                .attr("height", (d) -> y(d.data))
 
-         # create text
-         chart.selectAll("text")
+         # create number
+         chart.selectAll("text.number")
                .data(both, (d) -> d._id)
             .enter().append("text")
                .attr("x", (d, i) -> x(i) + (width / both.length))
@@ -76,6 +76,7 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
                .attr("dx", (d, i) -> -(width / both.length / 2))
                .attr("dy", "1.3em")
                .attr("text-anchor", "middle")
+               .attr("class", "number")
                .text((d) -> 0)
             .transition()
                .delay(100)
@@ -86,8 +87,8 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
                   i = d3.interpolate(this.textContent, d.data)
                   return (t) -> this.textContent = parseInt(i(t)))
 
-         # update text
-         chart.selectAll("text")
+         # update number
+         chart.selectAll("text.number")
              .transition()
                .delay(100)
                .duration(750)
@@ -97,32 +98,22 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
                   i = d3.interpolate(this.textContent, d.data)
                   return (t) -> this.textContent = parseInt(i(t)))
 
-         # create image
-         # chart.selectAll("div.greek-letters")
-         #       .data(both, (d) -> d._id)
-         #    .enter().append("div")
-         #       .attr("x", (d, i) -> x(i) + (.25 * (both.length - 1)))
-         #       .attr("y", (d) -> height)
-         #       .attr("width", (width / both.length) - (.25 * (both.length - 1)))
-         #       .attr("height", 0)
-         #       .attr("class", "greek-letters")
-         #       .attr("style", (d) -> "background: url(images/#{normalizeName(d.name)}.png) 50% 50% no-repeat;")
-         #    .transition()
-         #       .delay(100)
-         #       .duration(750)
-         #       .ease("quad-out")
-         #       .attr("y", (d) -> height - 50)
-         #       .attr("height", 40)
-
-         # # update image
-         # chart.selectAll("div.greek-letters")
-         #    .transition()
-         #       .delay(100)
-         #       .duration(750)
-         #       .ease("quad-out")
-         #       .attr("y", (d) -> height - 50)
-         #       .attr("height", 40)
-
+         # create names
+         chart.selectAll("text.name")
+               .data(both, (d) -> d._id)
+            .enter().append("text")
+               # .attr("x", (d, i) -> x(i) + 2 + (width / both.length) / 2)
+               # .attr("y", height + 100)
+               # .attr("transform", (d, i) -> "rotate(-90, #{x(i) + 4 + (width / both.length / 2)},#{height + 100})")
+               .attr("transform", (d, i) -> "translate(#{x(i) + 4 + (width / both.length / 2)},#{height + 100})rotate(-90)")
+               .attr("class", "name")
+               .text((d) -> d.name)
+            .transition()
+               .delay(100)
+               .duration(750)
+               .ease("quad-out")
+               # .attr("y", (d, i) -> x(i))
+               .attr("dx", 110)
 
       fc.changeToFraternity = () ->
          x = getXFunc(frat.length)
@@ -134,12 +125,19 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
                .attr("x", (d, i) -> i * width / frat.length + padding / 2)
                .attr("width", width / frat.length - padding)
 
-         chart.selectAll("text")
+         chart.selectAll("text.number")
                .data(both, (d) -> d._id)
             .transition()
                .duration(1000)
                .attr("x", (d, i) -> x(i) + (width / frat.length))
                .attr("dx", (d, i) -> -(width / frat.length / 2))
+
+         chart.selectAll("text.name")
+               .data(both, (d) -> d._id)
+            .transition()
+               .duration(1000)
+               .attr("y", (d, i) -> x(i) + (width / frat.length))
+               # .attr("dy", (d, i) -> -(width / frat.length / 2))
             
       fc.changeToSorority = () ->
          x = getXFunc(sorority.length)
@@ -152,7 +150,7 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
                .attr("x", (d, i) -> i * width / frat.length + padding / 2 - (w * frat.length))
                .attr("width", w - padding)
 
-         chart.selectAll("text")
+         chart.selectAll("text.number")
                .data(both, (d) -> d._id)
             .transition()
                .duration(1000)
@@ -169,12 +167,18 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
                .attr("x", (d, i) -> i * width / both.length + padding / 2)
                .attr("width", width / both.length - padding)
 
-         chart.selectAll("text")
+         chart.selectAll("text.number")
                .data(both, (d) -> d._id)
             .transition()
                .duration(1000)
                .attr("x", (d, i) -> x(i) + (width / both.length))
                .attr("dx", (d, i) -> -(width / both.length / 2))
+
+         chart.selectAll("text.name")
+               .data(both, (d) -> d._id)
+            .transition()
+               .duration(1000)
+               .attr("y", (d, i) -> x(i) + (width / both.length) / 2)
 
       _createGradient = (id, start, stop) =>
          gradient = chart.append("svg:linearGradient")

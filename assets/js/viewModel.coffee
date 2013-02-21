@@ -10,6 +10,8 @@ do ($ = jQuery, ko = window.ko, fc = window.fannect) ->
          @groups = ko.observableArray(groups)
          @group_slider_index = ko.observable(1)
          @points_slider_index = ko.observable(0)
+         @show_validator = ko.observable(false)
+         @validator_text = ko.observable("")
 
          @group_slider_index.subscribe (value) ->
             switch value
@@ -37,10 +39,23 @@ do ($ = jQuery, ko = window.ko, fc = window.fannect) ->
 
       submit: () =>
          if @email()?.length > 1 and @selected_group()._id
+            @show_validator(false)
             $.ajax(
                url: "/"
                type: "POST"
                data: { group_id: @selected_group()._id, email: @email() }
-            ).done (data, textStatus) ->
+            ).done (data, textStatus) =>
+               if data.message?.indexOf("User does not have a profile for team") > -1
+                  @show_validator(true)
+                  @validator_text("This account is not a fan of #{window.fannect.config.team_name}")
+               else if data.message?.indexOf("Invalid: email") > -1
+                  @show_validator(true)
+                  @validator_text("No account tied to #{@email()}!")
+                
+
                console.log data
                console.log textStatus
+
+         else
+            @show_validator(true)
+            @validator_text("Please enter an email and select a fraternity or sorority!")

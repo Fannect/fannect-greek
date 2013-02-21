@@ -8,6 +8,7 @@ fannect = require "../utils/fannectAccess"
 
 app.get "/:school", (req, res, next) ->
    school = config[req.params.school]
+   return next() unless school
    fannect.request
       url: "/v1/teams/#{school.team_id}/groups"
       qs: { tags: "greek" }

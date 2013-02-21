@@ -31,6 +31,7 @@ html
                      a.slider-item All Greek
                      a.slider-item Sorority
                      .slider-cover
+                        .slider-cover-arrow
                   .slider-right-button
 
             .chart-wrap
@@ -43,6 +44,7 @@ html
                      a.slider-item Dedication
                      a.slider-item Knowledge
                      .slider-cover
+                        .slider-cover-arrow
 
       .red-separator
       .bottom-section
@@ -59,5 +61,7 @@ html
                      .group-list(data-bind="foreach: groups")
                         .group-item(data-bind="text: name, click: $parent.selectGroup, css: { 'selected': selected }")
                a.submit-button(data-bind="click: submit") Submit
+
+               .validator(data-bind="slideUpDown: show_validator, text: validator_text", style="display:none;")
 
       .footer

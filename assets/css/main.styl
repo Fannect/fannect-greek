@@ -42,8 +42,8 @@ body
          position: absolute
 
 .top-section
-   background: url(/images/DotBackground.png) 50% 0 no-repeat
-   background-size: 1428px 673px
+   background: #000 url(/images/DotBackground.png) 50% 0 no-repeat
+   background-size: 1421px 673px
    min-width: 1177px
 
    .top-wrap
@@ -59,13 +59,13 @@ body
 
    .top-controls
       text-align: center
-      height: 56px
+      height: 70px
       border: 1px
       margin: 10px auto
-      padding: 7px 0 12px
+      padding: 22px 0 7px
       color: #eee
       background: url(/images/TopSlider.png) 50% 50% no-repeat
-      background-size: 1428px 75px 
+      background-size: 1419px 80px 
       .slider
          width: 575px
          margin: 0 auto
@@ -79,10 +79,16 @@ body
          .slider-cover
             background: url(/images/TopSliderCover.png) 50% 50% no-repeat
             background-size: 192px 56px
-            border-top: 2px solid #000
-
+            .slider-cover-arrow
+               position: absolute
+               background: url(/images/SliderTriangle.png) 50% 0 no-repeat
+               background-size: 14px 7px
+               width: 100%
+               height: 7px
+               bottom: -1px
+            
    .chart-wrap 
-      margin: 36px 0 38px
+      margin: 10px 0
       height: 377px
       text-align: center
       background: url(/images/GraphBox.png) 50% no-repeat
@@ -197,6 +203,7 @@ body
          box-shadow: inset 0 0px 4px #333
          max-height: 300px
          background: #fff
+         z-index: 1000
       .group-list
          .group-item
             padding: (thin-padding / 2) thin-padding
@@ -218,14 +225,28 @@ body
       &:active
          background-gradient: #999 #eee
          box-shadow: inset 0 1px 4px rgba(0,0,0,.6), inset 0 -1px 2px rgba(0,0,0,.3)
+
+.validator
+   position:relative
+   margin: 0 auto
+   box-shadow: 0 2px 8px #000
+   border-radius: 8px
+   padding: normal-padding
+   margin-top: 12px
+   background: rgba(0,0,0,.15)
+   
+
 .footer
    height: 60px
-   background: url(/images/DotBackground.png) 50% 0 no-repeat
+   background: #000 url(/images/DotBackground.png) 50% 0 no-repeat
    background-size: 1428px 673px
+   min-width: 1177px
 
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5)
    .top-controls
       background-image: url(/images/TopSlider@2x.png) !important
+   .slider-cover-arrow
+      background-image: url(/images/SliderTriangle@2x.png) !important
    .chart-wrap
       background-image: url(/images/GraphBox@2x.png) !important
    .bottom-section
