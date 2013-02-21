@@ -89,9 +89,6 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
          chart.selectAll("text.name")
                .data(both, (d) -> "name_" + d._id)
             .enter().append("text")
-               # .attr("x", (d, i) -> x(i) + 2 + (width / both.length) / 2)
-               # .attr("y", height + 100)
-               # .attr("transform", (d, i) -> "rotate(-90, #{x(i) + 4 + (width / both.length / 2)},#{height + 100})")
                .attr("transform", (d, i) -> "translate(#{x(i) + 4 + (width / both.length / 2)},#{height + 100})rotate(-90)")
                .attr("class", "name")
                .text((d) -> d.name)
@@ -99,7 +96,6 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
                .delay(100)
                .duration(750)
                .ease("quad-out")
-               # .attr("y", (d, i) -> x(i))
                .attr("dx", 110)
 
       fc.changeToFraternity = () ->

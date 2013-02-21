@@ -12,6 +12,8 @@ do ($ = jQuery, ko = window.ko, fc = window.fannect) ->
          @points_slider_index = ko.observable(0)
          @show_validator = ko.observable(false)
          @validator_text = ko.observable("")
+         @show_success = ko.observable()
+         @is_submitting = ko.observable()
 
          @group_slider_index.subscribe (value) ->
             switch value
@@ -38,24 +40,34 @@ do ($ = jQuery, ko = window.ko, fc = window.fannect) ->
          @show_selector(false)
 
       submit: () =>
+         return if @is_submitting()
          if @email()?.length > 1 and @selected_group()._id
+            @is_submitting(true)
             @show_validator(false)
+            @show_success(false)
             $.ajax(
                url: "/"
                type: "POST"
                data: { group_id: @selected_group()._id, email: @email() }
             ).done (data, textStatus) =>
-               if data.message?.indexOf("User does not have a profile for team") > -1
+               @is_submitting(false)
+               console.log data
+               if data?.message?.indexOf("User does not have a profile for team") > -1
                   @show_validator(true)
-                  @validator_text("This account is not a fan of #{window.fannect.config.team_name}")
-               else if data.message?.indexOf("Invalid: email") > -1
+                  @validator_text("You don't seem to be a fan of the #{window.fannect.config.team_name} yet!")
+               else if data?.message?.indexOf("Invalid: email") > -1
                   @show_validator(true)
                   @validator_text("No account tied to #{@email()}!")
-                
-
-               console.log data
-               console.log textStatus
-
+               else if data?.message?.indexOf("User is already a part of group") > -1
+                  @show_validator(true)
+                  @validator_text("You are already part of this house!")
+               else if data?.status == "success"
+                  @show_success(true)
+                  @email("")
+                  setTimeout (() => @show_success(false)), 3000
+               else 
+                  @show_validator(true)
+                  @validator_text("Something unexpected happened... try again later!")
          else
             @show_validator(true)
             @validator_text("Please enter an email and select a fraternity or sorority!")

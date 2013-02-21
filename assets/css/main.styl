@@ -49,6 +49,7 @@ body
    .top-wrap
       width: 1177px
       margin: 0 auto
+      padding-bottom: 10px
 
    .title
       font-size: 2.4em
@@ -61,7 +62,7 @@ body
       text-align: center
       height: 70px
       border: 1px
-      margin: 10px auto
+      margin: 0 auto
       padding: 22px 0 7px
       color: #eee
       background: url(/images/TopSlider.png) 50% 50% no-repeat
@@ -88,7 +89,7 @@ body
                bottom: -1px
             
    .chart-wrap 
-      margin: 10px 0
+      margin: 10px 0 0
       height: 377px
       text-align: center
       background: url(/images/GraphBox.png) 50% no-repeat
@@ -108,7 +109,7 @@ body
       height: 25px
       width: 300px
       border: 1px
-      margin: 10px auto 0
+      margin: 0 auto
       padding: 5px 45px
       font-size: .8em
       .slider-space
@@ -147,11 +148,11 @@ body
       background: url(/images/logo.png) 50% no-repeat
       background-size: 200px 34px
       height: 51px
-      margin-bottom: 15px
+      margin-bottom: 4px
     
    .email
       padding: thin-padding 60px thin-padding thin-padding
-      box-shadow: inset 0 1px 4px #333
+      box-shadow: inset 0 1px 4px #333, 0 2px 3px rgba(255,255,255,0.55)
       border-radius: 8px
       border: none
       -webkit-appearance: none
@@ -169,7 +170,7 @@ body
          .group-name
             background-color: #fff
             padding: thin-padding 60px thin-padding thin-padding
-            box-shadow: inset 0 1px 4px #333
+            box-shadow: inset 0 1px 4px #333, 0 2px 3px rgba(255,255,255,0.55)
             border-radius: 8px
             &.active
                border-radius: 8px 8px 0px 0px
@@ -223,9 +224,11 @@ body
       text-align: center
       background-gradient: #eee #999
       &:active
+      &.submitting
          background-gradient: #999 #eee
          box-shadow: inset 0 1px 4px rgba(0,0,0,.6), inset 0 -1px 2px rgba(0,0,0,.3)
 
+.success
 .validator
    position:relative
    margin: 0 auto
@@ -234,8 +237,13 @@ body
    padding: normal-padding
    margin-top: 12px
    background: rgba(0,0,0,.15)
-   
+   text-align: center
+   color: #840808
+   text-shadow: 0 2px 2px rgba(255,255,255,0.35)
 
+.success
+   color: #088411
+   
 .footer
    height: 60px
    background: #000 url(/images/DotBackground.png) 50% 0 no-repeat

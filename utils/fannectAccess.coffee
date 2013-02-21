@@ -12,8 +12,6 @@ fannect = module.exports = (config) ->
    return fannect
 
 fannect.request = (options, callback) ->
-
-
    if access_token == null
       return fannect.getAccessToken (err) ->
          return callback(err) if err
@@ -23,11 +21,9 @@ fannect.request = (options, callback) ->
    options.qs = {} unless options.qs
    options.qs.access_token = access_token
 
-   
    rest options, (err, resp, body) ->
       return callback(err) if err
       body = JSON.parse(body) if typeof(body) == "string"
-      console.log "#{options.url}:", body
       if resp.statusCode == 401 
          if not options.second_try
             options.second_try = true
@@ -38,7 +34,6 @@ fannect.request = (options, callback) ->
             callback(new Error("Invalid credentials"))
       else
          callback(null, body)
-
 
 fannect.getAccessToken = (callback) ->
    rest

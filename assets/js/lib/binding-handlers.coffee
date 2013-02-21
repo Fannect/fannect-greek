@@ -4,10 +4,12 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
          valueUnwrapped = ko.utils.unwrapObservable valueAccessor()
          allBindings = allBindingsAccessor()
          duration = allBindings.duration or 400
+         $el = $(element)
+         $el.stop() if allBindings.stopPrevious
          if valueUnwrapped
-            $(element).slideDown duration
+            $el.slideDown duration
          else
-            $(element).slideUp duration
+            $el.slideUp duration
 
    ko.bindingHandlers.clickOff = 
       init: (element, valueAccessor, allBindingsAccessor, viewModel) ->

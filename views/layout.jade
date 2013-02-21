@@ -51,17 +51,18 @@ html
          .bottom-wrap
             .sign-up
                .logo
-               input(type="email", pattern="[^ @]*@[^ @]*", class="email", data-bind="value: email", placeholder="fannect user email")
+               input(type="email", pattern="[^ @]*@[^ @]*", class="email", data-bind="value: email", placeholder="Fannect User Email")
                .selector
                   .selected(data-bind="click: toggleSelector, clickOff: show_selector")
                      .group-name(data-bind="html: selected_group().name, css: {'active': show_selector}")
                      .drop-button(data-bind="css: {'active': show_selector}")
                         .down-arrow
-                  .list-wrap(data-bind="slideUpDown: show_selector")
+                  .list-wrap(data-bind="slideUpDown: show_selector, stopPrevious: true", style="display:none;")
                      .group-list(data-bind="foreach: groups")
                         .group-item(data-bind="text: name, click: $parent.selectGroup, css: { 'selected': selected }")
-               a.submit-button(data-bind="click: submit") Submit
+               a.submit-button(data-bind="click: submit, css: {'submitting': is_submitting}") Submit
 
                .validator(data-bind="slideUpDown: show_validator, text: validator_text", style="display:none;")
+               .success(data-bind="slideUpDown: show_success", style="display:none;") You are now part of this house! Score points to help your house reach the top!
 
       .footer
