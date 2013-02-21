@@ -4,6 +4,7 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
       height = 350
       width = 1150
       padding = 4
+      bottom_padding = 70
 
       frat = []
       sorority = []
@@ -39,7 +40,7 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
          (max = d.points.overall if d.points.overall > max) for d in both
          max = max * 1.05
          
-         y = d3.scale.linear().domain([-2, max]).rangeRound([0, height])
+         y = d3.scale.linear().domain([0, max]).rangeRound([0, height - bottom_padding])
          x = getXFunc(both.length)
          
          # create bars
@@ -51,21 +52,15 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
                .attr("width", (width / both.length) - padding)
                .attr("height", 0)
                .attr("class", (d) -> d.style + " bar")
-            .transition()
-               .delay(100)
-               .duration(750)
-               .ease("quad-out")
-               .attr("y", (d) -> height - y(d.data) - .5)
-               .attr("height", (d) -> y(d.data))
-
+            
          # update bars
          chart.selectAll("rect.bar")
             .transition()
                .delay(100)
                .duration(750)
                .ease("quad-out")
-               .attr("y", (d) -> height - y(d.data) - .5)
-               .attr("height", (d) -> y(d.data))
+               .attr("y", (d) -> height - y(d.data) - .5 - bottom_padding)
+               .attr("height", (d) -> y(d.data) + bottom_padding)
 
          # create number
          chart.selectAll("text.number")
@@ -78,29 +73,21 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
                .attr("text-anchor", "middle")
                .attr("class", "number")
                .text((d) -> 0)
+            
+         # update number
+         chart.selectAll("text.number")
             .transition()
                .delay(100)
                .duration(750)
                .ease("quad-out")
-               .attr("y", (d, i) -> height - y(d.data) - .5)
-               .tween("text", (d) ->
-                  i = d3.interpolate(this.textContent, d.data)
-                  return (t) -> this.textContent = parseInt(i(t)))
-
-         # update number
-         chart.selectAll("text.number")
-             .transition()
-               .delay(100)
-               .duration(750)
-               .ease("quad-out")
-               .attr("y", (d, i) -> height - y(d.data) - .5)
+               .attr("y", (d, i) -> height - y(d.data) - .5 - bottom_padding)
                .tween("text", (d) ->
                   i = d3.interpolate(this.textContent, d.data)
                   return (t) -> this.textContent = parseInt(i(t)))
 
          # create names
          chart.selectAll("text.name")
-               .data(both, (d) -> d._id)
+               .data(both, (d) -> "name_" + d._id)
             .enter().append("text")
                # .attr("x", (d, i) -> x(i) + 2 + (width / both.length) / 2)
                # .attr("y", height + 100)
@@ -117,13 +104,14 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
 
       fc.changeToFraternity = () ->
          x = getXFunc(frat.length)
+         w =  width / frat.length - padding
 
          chart.selectAll("rect.bar")
                .data(both, (d) -> d._id)
             .transition()
                .duration(1000)
                .attr("x", (d, i) -> i * width / frat.length + padding / 2)
-               .attr("width", width / frat.length - padding)
+               .attr("width", w)
 
          chart.selectAll("text.number")
                .data(both, (d) -> d._id)
@@ -133,12 +121,11 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
                .attr("dx", (d, i) -> -(width / frat.length / 2))
 
          chart.selectAll("text.name")
-               .data(both, (d) -> d._id)
+               .data(both, (d) -> "name_" + d._id)
             .transition()
                .duration(1000)
-               .attr("y", (d, i) -> x(i) + (width / frat.length))
-               # .attr("dy", (d, i) -> -(width / frat.length / 2))
-            
+               .attr("transform", (d, i) -> "translate(#{i * width / frat.length + padding / 2 + w / 2 + 4},#{height + 100})rotate(-90)")
+               
       fc.changeToSorority = () ->
          x = getXFunc(sorority.length)
          w = width / sorority.length
@@ -147,7 +134,7 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
                .data(both, (d) -> d._id)
             .transition()
                .duration(1000)
-               .attr("x", (d, i) -> i * width / frat.length + padding / 2 - (w * frat.length))
+               .attr("x", (d, i) -> i * w + padding / 2 - (w * frat.length))
                .attr("width", w - padding)
 
          chart.selectAll("text.number")
@@ -156,6 +143,13 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
                .duration(1000)
                .attr("x", (d, i) -> x(i) + (width / sorority.length) - (w * frat.length))
                .attr("dx", (d, i) -> -(width / sorority.length / 2))
+
+         chart.selectAll("text.name")
+               .data(both, (d) -> "name_" + d._id)
+            .transition()
+               .duration(1000)
+               .attr("transform", (d, i) -> "translate(#{i * w + padding / 2 - (w * frat.length) + w / 2 + 4},#{height + 100})rotate(-90)")
+               
 
       fc.changeToBoth = () ->
          x = getXFunc(both.length)
@@ -175,10 +169,17 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
                .attr("dx", (d, i) -> -(width / both.length / 2))
 
          chart.selectAll("text.name")
-               .data(both, (d) -> d._id)
+               .data(both, (d) -> "name_" + d._id)
             .transition()
                .duration(1000)
-               .attr("y", (d, i) -> x(i) + (width / both.length) / 2)
+               # .attr("transform", "translate(222,222)scale(23)")
+               # .attr("transform", (d, i) -> "translate(#{x(i) + 4 + (width / both.length / 2)},#{height + 100})")
+               .attr("transform", (d, i) -> "translate(#{x(i) + 4 + (width / both.length / 2)},#{height + 100})rotate(-90)")
+            # .transition()
+            #    .duration(1000)
+            #    .attr("y", (d, i) -> x(i) + 4 + (width / both.length / 2))
+               # .attr("dx", (d, i) -> -(width / both.length / 2))
+
 
       _createGradient = (id, start, stop) =>
          gradient = chart.append("svg:linearGradient")
