@@ -6,6 +6,9 @@ app = module.exports = express()
 
 fannect = require "../utils/fannectAccess"
 
+app.get "", (req, res, next) ->
+   res.redirect "/mu"
+
 app.get "/:school", (req, res, next) ->
    school = config[req.params.school]
    return next() unless school
