@@ -1,6 +1,6 @@
 {
    "ku": {
-      "team_id": "51084c08f71f44551a7b1e66",
+      "team_id": "5112449520b4f61f5be20ebd",
       "team_name": "Kansas Jayhawks",
       "fraternity": {
          "start_color": "#0244cb",
@@ -13,7 +13,7 @@
       "title": "University of Kansas"
    },
    "mu": {
-      "team_id": "51084c08f71f44551a7b1e66",
+      "team_id": "5112449520b4f61f5be20e93",
       "team_name": "Missouri Tigers",
       "fraternity": {
          "start_color": "#777a87",
@@ -24,5 +24,18 @@
          "stop_color": "#765b08"
       },
       "title": "University of Missouri"
+   },
+   "ksu": {
+      "team_id": "5112449520b4f61f5be20e6c",
+      "team_name": "Kansas State Wildcats",
+      "fraternity": {
+         "start_color": "#777a87",
+         "stop_color": "#1b1b1e"
+      },
+      "sorority": {
+         "start_color": "#4a1189",
+         "stop_color": "#1e0736"
+      },
+      "title": "Kansas State University"
    }
 }
