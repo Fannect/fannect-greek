@@ -6,7 +6,7 @@ app = module.exports = express()
 
 fannect = require "../utils/fannectAccess"
 
-app.get "", (req, res, next) ->
+app.get "/", (req, res, next) -> 
    res.redirect "/mu"
 
 app.get "/:school", (req, res, next) ->
