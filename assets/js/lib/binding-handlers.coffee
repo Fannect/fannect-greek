@@ -42,4 +42,13 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
          $el = $(element)
          count = allBindingsAccessor().count
          $el.find(".slider-cover").animate({left: index * ($el.width() / count) })
+
+   ko.bindingHandlers.menu = 
+      init: (element, valueAccessor, allBindingsAccessor, viewModel) ->
+         value = valueAccessor()
+
+         $children = $(element).find("a").click () ->
+            value($children.index(this))
+            $children.removeClass("active")
+            $(this).addClass("active")
          

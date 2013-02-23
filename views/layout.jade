@@ -36,16 +36,12 @@ html
 
             .chart-wrap
 
-            .bottom-controls
-               .slider
-                  .slider-space(data-bind="slider: points_slider_index, count: 4")
-                     a.slider-item Overall
-                     a.slider-item Passion
-                     a.slider-item Dedication
-                     a.slider-item Knowledge
-                     .slider-cover
-                        .slider-cover-arrow
-
+            .bottom-controls(data-bind="menu: points_menu_index")
+               a.overall.active Overall
+               a.passion Passion
+               a.dedication Dedication
+               a.knowledge Knowledge
+               
       .red-separator
       .bottom-section
          .bottom-wrap

@@ -9,7 +9,7 @@ do ($ = jQuery, ko = window.ko, fc = window.fannect) ->
          groups[i].selected = ko.observable(false) for g, i in groups
          @groups = ko.observableArray(groups)
          @group_slider_index = ko.observable(1)
-         @points_slider_index = ko.observable(0)
+         @points_menu_index = ko.observable(0)
          @show_validator = ko.observable(false)
          @validator_text = ko.observable("")
          @show_success = ko.observable()
@@ -21,7 +21,7 @@ do ($ = jQuery, ko = window.ko, fc = window.fannect) ->
                when 1 then fc.changeToBoth()
                when 2 then fc.changeToSorority()
                
-         @points_slider_index.subscribe (value) ->
+         @points_menu_index.subscribe (value) ->
             switch value
                when 0 then fc.setChartValue("overall")
                when 1 then fc.setChartValue("passion")

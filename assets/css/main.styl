@@ -105,19 +105,32 @@ body
          font-size: .8em
 
    .bottom-controls
-      text-align: center
-      height: 25px
-      width: 300px
+      width: 528px
+      height: 40px
       border: 1px
       margin: 0 auto
-      padding: 5px 45px
-      font-size: .8em
-      .slider-space
-         height: 25px
-         line-height: 25px
-         .slider-cover
-         .slider-item
-            width: 25%
+      padding: 5px 0
+      font-size: 23px
+      line-height: 40px
+      color: #bbb
+      font-family: JerseyM54
+      a
+         float: left
+         height: 100%
+         display: block
+         cursor: pointer
+         &.overall
+            width: 124px
+         &.passion
+            width: 124px
+         &.dedication
+            width: 156px
+         &.knowledge
+            width: 124px
+      .active
+         color: #fff
+         font-size: 25px
+
 
 .red-separator
    height: 14px
@@ -190,8 +203,8 @@ body
                bottom: 0
             .down-arrow
                position: absolute
-               background: url(/images/DownArrow.png) no-repeat
-               background-size: 31px 21px
+               // background: url(/images/DownArrow.png) no-repeat
+               // background-size: 31px 21px
                top: 50%
                left: 50%
                width: 31px
@@ -261,8 +274,8 @@ body
       background-image: url(/images/Pattern_FabricKnit@2x.png) !important
    .logo
       background-image: url(/images/logo@2x.png) !important
-   .down-arrow
-      background-image: url(/images/DownArrow@2x.png) !important
+   // .down-arrow
+   //    background-image: url(/images/DownArrow@2x.png) !important
    .top-section
    .footer
       background-image: url(/images/DotBackground@2x.png) !important

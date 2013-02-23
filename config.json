@@ -16,12 +16,12 @@
       "team_id": "51084c08f71f44551a7b1e66",
       "team_name": "Missouri Tigers",
       "fraternity": {
-         "start_color": "#0244cb",
-         "stop_color": "#04215a"
+         "start_color": "#777a87",
+         "stop_color": "#1b1b1e"
       },
       "sorority": {
-         "start_color": "#e8120f",
-         "stop_color": "#7f0907"
+         "start_color": "#e6b10b",
+         "stop_color": "#765b08"
       },
       "title": "University of Missouri"
    }
