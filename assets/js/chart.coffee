@@ -4,7 +4,7 @@ do ($ = jQuery, d3 = window.d3, fc = window.fannect) ->
       height = 350
       width = 1150
       padding = 4
-      bottom_padding = 90
+      bottom_padding = 100
 
       frat = []
       sorority = []

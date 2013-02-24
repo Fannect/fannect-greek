@@ -51,7 +51,7 @@ app.get "/:school", (req, res, next) ->
    #       team_key: 'l.ncaa.org.mbasket-t.B33',
    #       team_name: 'Kansas Jayhawks',
    #       tags: [ 'greek', 'sorority' ],
-   #       points: { dedication: 92, passion: 105, knowledge: 152, overall: 349 } },
+   #       points: { dedication: 0, passion: 0, knowledge: 0, overall: 0 } },
    #    {  
    #       _id: '511ad034b5a7715ec6000571',
    #       members: 2,
