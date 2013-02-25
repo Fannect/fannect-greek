@@ -14,7 +14,7 @@ app.get "/:school", (req, res, next) ->
    return next() unless school
    fannect.request
       url: "/v1/teams/#{school.team_id}/groups"
-      qs: { tags: "greek" }
+      qs: { tags: "greek", limit: 60 }
    , (err, groups) ->
       return res.render("error", { error: err }) if err
       res.render "layout", { groups: groups, config: school }
