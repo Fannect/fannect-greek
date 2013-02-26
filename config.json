@@ -3,12 +3,12 @@
       "team_id": "5112449520b4f61f5be20ebd",
       "team_name": "Kansas Jayhawks",
       "fraternity": {
-         "start_color": "#0062E6",
-         "stop_color": "#006CFF"
+         "start_color": "#006CFF",
+         "stop_color": "#0062E6"
       },
       "sorority": {
-         "start_color": "#A7001C",
-         "stop_color": "#E60000"
+         "start_color": "#E60000",
+         "stop_color": "#A7001C"
       },
       "title": "University of Kansas"
    },
@@ -16,12 +16,12 @@
       "team_id": "5112449520b4f61f5be20e93",
       "team_name": "Missouri Tigers",
       "fraternity": {
-         "start_color": "#303030",
-         "stop_color": "#686868"
+         "start_color": "#686868",
+         "stop_color": "#303030"
       },
       "sorority": {
-         "start_color": "#D49600",
-         "stop_color": "#FFC600"
+         "start_color": "#FFC600",
+         "stop_color": "#D49600"
       },
       "title": "University of Missouri"
    },
@@ -29,12 +29,12 @@
       "team_id": "5112449520b4f61f5be20e6c",
       "team_name": "Kansas State Wildcats",
       "fraternity": {
-         "start_color": "#737373",
-         "stop_color": "#D6D6D6"
+         "start_color": "#D6D6D6",
+         "stop_color": "#737373"
       },
       "sorority": {
-         "start_color": "#51008A",
-         "stop_color": "#A700E5"
+         "start_color": "#A700E5",
+         "stop_color": "#51008A"
       },
       "title": "Kansas State University"
    }
